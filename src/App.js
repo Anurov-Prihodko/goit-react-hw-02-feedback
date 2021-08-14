@@ -1,19 +1,17 @@
 import FriendList from './components/FriendList';
-import SocialProfile from './components/SocialProfile';
+import SocialProfile from './components/SocialProfile/SocialProfile';
+import Statistics from './components/Statistics';
+import TransactionHistory from './components/TransactionHistory';
+import transactions from './transaction-history/transactions.json';
+import statistics from './statistics/statistical-data.json';
 import friends from './friend-list/friends.json';
 import user from './social-profile/user.json';
+// import Container from './components/block/Container'
 
 function App() {
   return (
     <div>
-      <FriendList
-        isOnline={friends[0].isOnline}
-        avatarImage={friends[0].avatar}
-        name={friends[0].name}
-      />
-      <br />
-      <hr />
-      <br />
+      <h2>Задание 1 - Профиль социальной сети</h2>
       <SocialProfile
         avatar={user.avatar}
         name={user.name}
@@ -23,33 +21,17 @@ function App() {
         views={user.stats.views}
         likes={user.stats.likes}
       />
+      <hr />
+      <h2>Задание 2 - Секция статистики</h2>
+      <Statistics title="Upload stats" stats={statistics} />
+      <hr />
+      <h2>Задание 3 - Список друзей</h2>
+      <FriendList friends={friends} />
+      <hr />
+      <h2>Задание 4 - История транзакций</h2>
+      <TransactionHistory items={transactions} />
     </div>
   );
 }
 
 export default App;
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           PUG LIFE
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

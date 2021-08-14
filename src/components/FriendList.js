@@ -1,15 +1,27 @@
-import defaultFoto from './defaultfoto.jpg';
-// const friend = friends[2];
+import PropTypes from 'prop-types';
+import FriendsElement from './FriendsElement';
 
-const FriendList = props => {
-  const { isOnline, avatarImage = defaultFoto, name } = props;
+const FriendList = ({ friends }) => {
   return (
-    <li className="item">
-      <span className="status">{isOnline}</span>
-      <img className="avatar" src={avatarImage} alt={name} width="48" />
-      <p className="name">{name}</p>
-    </li>
+    <ul className="friend-list">
+      {friends.map(friend => (
+        <FriendsElement
+          key={friend.id}
+          avatar={friend.avatar}
+          name={friend.name}
+          isOnline={friend.isOnline}
+        />
+      ))}
+    </ul>
   );
+};
+
+FriendList.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  ),
 };
 
 export default FriendList;
