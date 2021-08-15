@@ -1,21 +1,22 @@
 import PropTypes from 'prop-types';
-import defaultFoto from './defaultfoto.jpg';
+import defaultFoto from '../defaultfoto.jpg';
+import styles from './FriendList.module.css';
 
 const FriendsElement = ({ id, avatar = defaultFoto, name, isOnline }) => {
   return (
-    <li className="item" key={id}>
+    <li className={styles.item} key={id}>
       {isOnline ? (
-        <span className="status">🟢</span>
+        <span className={styles.status + ' ' + styles.online}></span>
       ) : (
-        <span className="status">🔴</span>
+        <span className={styles.status + ' ' + styles.offline}></span>
       )}
       <img
-        className="avatar"
+        className={styles.avatar}
         src={avatar ?? defaultFoto}
         alt={name}
         width="48"
       />
-      <p className="name">{name}</p>
+      <p className={styles.friend_name}>{name}</p>
     </li>
   );
 };
