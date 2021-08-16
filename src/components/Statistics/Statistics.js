@@ -13,11 +13,7 @@ function getRandomColor() {
 const Statistics = ({ title, stats }) => {
   return (
     <section className={styles.statistics}>
-      {title ? (
-        <h2 className={styles.title}>Upload stats</h2>
-      ) : (
-        <h2 className={styles.title}>{title}</h2>
-      )}
+      {title ? <h2 className={styles.title}>Upload stats</h2> : null}
 
       <ul className={styles.stat_list}>
         {stats.map(stata => (
