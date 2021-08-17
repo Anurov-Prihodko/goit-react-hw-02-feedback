@@ -1,37 +1,45 @@
-import FriendList from './components/FriendList/FriendList';
-import SocialProfile from './components/SocialProfile/SocialProfile';
-import Statistics from './components/Statistics/Statistics';
-import TransactionHistory from './components/TransactionHistory/TransactionHistory';
-import transactions from './transaction-history/transactions.json';
-import statistics from './statistics/statistical-data.json';
-import friends from './friend-list/friends.json';
-import user from './social-profile/user.json';
-// import Container from './components/block/Container'
+import React, { Component } from 'react';
+// import Feedback from './components/Feedback';
+// import Dropdown from './components/Dropdown';
+// import ColorPicker from './components/ColorPicker';
+import TodoList from './components/TodoList';
 
-function App() {
-  return (
-    <div>
-      <h2>Задание 1 - Профиль социальной сети</h2>
-      <SocialProfile
-        avatar={user.avatar}
-        name={user.name}
-        tag={user.tag}
-        location={user.location}
-        followers={user.stats.followers}
-        views={user.stats.views}
-        likes={user.stats.likes}
-      />
-      <hr />
-      <h2>Задание 2 - Секция статистики</h2>
-      <Statistics title="Upload stats" stats={statistics} />
-      <hr />
-      <h2>Задание 3 - Список друзей</h2>
-      <FriendList friends={friends} />
-      <hr />
-      <h2>Задание 4 - История транзакций</h2>
-      <TransactionHistory items={transactions} />
-    </div>
-  );
+// const colorPickerOptions = [
+//   { label: 'red', color: '#F44336' },
+//   { label: 'green', color: '#4CAF50' },
+//   { label: 'blue', color: '#2196F3' },
+//   { label: 'grey', color: '#607D8B' },
+//   { label: 'pink', color: '#E91E63' },
+//   { label: 'indigo', color: '#3F51B5' },
+// ];
+
+class App extends Component {
+  state = {
+    todos: [],
+  };
+
+  render() {
+    return (
+      <>
+        {/* <ColorPicker options={colorPickerOptions} />
+        <hr />
+        <Dropdown />
+        <hr />
+        <Feedback /> */}
+        <TodoList />
+      </>
+    );
+  }
 }
+
+// const App = () => (
+//   <>
+//     <ColorPicker options={colorPickerOptions} />
+//     <hr />
+//     <Dropdown />
+//     <hr />
+//     <Feedback />
+//   </>
+// );
 
 export default App;
