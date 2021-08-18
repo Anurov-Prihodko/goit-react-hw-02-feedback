@@ -15,10 +15,28 @@ import TodoList from './components/TodoList';
 
 class App extends Component {
   state = {
-    todos: [],
+    todos: [
+      { id: 'id-1', text: 'Выучить основы React', copmleted: false },
+      { id: 'id-2', text: 'Разобраться с React Router', copmleted: false },
+      { id: 'id-3', text: 'Пережить Redux', copmleted: true },
+    ],
+  };
+
+  deleteTodo = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
   };
 
   render() {
+    const { todos } = this.state;
+
+    const totalTodosCount = todos.length;
+    const completeTodosCount = todos.reduce(
+      (acc, todo) => (todo.copmleted ? acc + 1 : acc),
+      0,
+    );
+
     return (
       <>
         {/* <ColorPicker options={colorPickerOptions} />
@@ -26,7 +44,11 @@ class App extends Component {
         <Dropdown />
         <hr />
         <Feedback /> */}
-        <TodoList />
+        <div>
+          <p>Всего: {totalTodosCount}</p>
+          <p>Ко-во выполненных: {completeTodosCount} </p>
+        </div>
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       </>
     );
   }
