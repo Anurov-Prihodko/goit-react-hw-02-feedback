@@ -1,16 +1,6 @@
 import React, { Component } from 'react';
 // import Feedback from './components/Feedback';
 // import Dropdown from './components/Dropdown';
-// import ColorPicker from './components/ColorPicker';
-
-// const colorPickerOptions = [
-//   { label: 'red', color: '#F44336' },
-//   { label: 'green', color: '#4CAF50' },
-//   { label: 'blue', color: '#2196F3' },
-//   { label: 'grey', color: '#607D8B' },
-//   { label: 'pink', color: '#E91E63' },
-//   { label: 'indigo', color: '#3F51B5' },
-// ];
 
 class App extends Component {
   state = {
@@ -19,48 +9,59 @@ class App extends Component {
     bad: 0,
   };
 
-  handleIncrement = () => {
+  countTotalFeedback = e => {
+    const buttonName = e.currentTarget.name;
+
     this.setState(prevState => ({
-      good: prevState.state.good + 1,
+      [buttonName]: prevState[buttonName] + 1,
     }));
   };
 
+  getPositiveFeedback = () => {
+    const { good, neutral, bad } = this.state;
+
+    const total = (good * 100) / (neutral + bad + good);
+    return Math.round(total);
+  };
+
   render() {
+    const { good, neutral, bad } = this.state;
+    const options = Object.keys(this.state);
+    const calckOfPositiveFeedback = this.getPositiveFeedback();
+
     return (
       <div>
         <div>
           <h1>Please leave feedback</h1>
           <div>
-            <button type="button" onClick={this.handleIncrement}>
-              Good
-            </button>
-            <button type="button">Neutral</button>
-            <button type="button">Bad</button>
+            {options.map((option, index) => (
+              <button
+                key={index}
+                name={option}
+                onClick={this.countTotalFeedback}
+              >
+                {option}
+              </button>
+            ))}
           </div>
         </div>
         <div>
           <h2>Statistics</h2>
-          <div>
-            <p>Good: {this.state.good}</p>
-            <p>Neutral: </p>
-            <p>Bad: </p>
-            <p>Total: </p>
-            <p>Positive feedback: </p>
-          </div>
+          {good + neutral + bad === 0 ? (
+            <p>No feedback given</p>
+          ) : (
+            <div>
+              <p>Good: {good}</p>
+              <p>Neutral: {neutral}</p>
+              <p>Bad: {bad}</p>
+              <p>Total: {good + neutral + bad}</p>
+              <p>Positive feedback: {calckOfPositiveFeedback}</p>
+            </div>
+          )}
         </div>
       </div>
     );
   }
 }
-
-// const App = () => (
-//   <>
-//     {/* <ColorPicker options={colorPickerOptions} /> */}
-//     {/* <hr /> */}
-//     <Dropdown />
-//     <hr />
-//     <Feedback />
-//   </>
-// );
 
 export default App;
