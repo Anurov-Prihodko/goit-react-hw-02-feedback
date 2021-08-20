@@ -1,5 +1,6 @@
 .counter {
   width: 330px;
+  /* display: flex; */
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
@@ -10,7 +11,7 @@
 .value {
   display: block;
   font-weight: 700;
-  font-size: 50px;
+  font-size: 20px;
   color: #717579;
   text-align: center;
   padding: 15px 0;

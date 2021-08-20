@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import Feedback from './components/Feedback';
 // import Dropdown from './components/Dropdown';
 // import ColorPicker from './components/ColorPicker';
-import TodoList from './components/TodoList';
 
 // const colorPickerOptions = [
 //   { label: 'red', color: '#F44336' },
@@ -15,49 +14,49 @@ import TodoList from './components/TodoList';
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 'id-1', text: 'Выучить основы React', copmleted: false },
-      { id: 'id-2', text: 'Разобраться с React Router', copmleted: false },
-      { id: 'id-3', text: 'Пережить Redux', copmleted: true },
-    ],
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
-  deleteTodo = todoId => {
+  handleIncrement = () => {
     this.setState(prevState => ({
-      todos: prevState.todos.filter(todo => todo.id !== todoId),
+      good: prevState.state.good + 1,
     }));
   };
 
   render() {
-    const { todos } = this.state;
-
-    const totalTodosCount = todos.length;
-    const completeTodosCount = todos.reduce(
-      (acc, todo) => (todo.copmleted ? acc + 1 : acc),
-      0,
-    );
-
     return (
-      <>
-        {/* <ColorPicker options={colorPickerOptions} />
-        <hr />
-        <Dropdown />
-        <hr />
-        <Feedback /> */}
+      <div>
         <div>
-          <p>Всего: {totalTodosCount}</p>
-          <p>Ко-во выполненных: {completeTodosCount} </p>
+          <h1>Please leave feedback</h1>
+          <div>
+            <button type="button" onClick={this.handleIncrement}>
+              Good
+            </button>
+            <button type="button">Neutral</button>
+            <button type="button">Bad</button>
+          </div>
         </div>
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
-      </>
+        <div>
+          <h2>Statistics</h2>
+          <div>
+            <p>Good: {this.state.good}</p>
+            <p>Neutral: </p>
+            <p>Bad: </p>
+            <p>Total: </p>
+            <p>Positive feedback: </p>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
 // const App = () => (
 //   <>
-//     <ColorPicker options={colorPickerOptions} />
-//     <hr />
+//     {/* <ColorPicker options={colorPickerOptions} /> */}
+//     {/* <hr /> */}
 //     <Dropdown />
 //     <hr />
 //     <Feedback />

@@ -4,10 +4,13 @@ import s from './Feedback.module.css';
 const Controls = ({ onIncrement, onDecrement }) => (
   <div className={s.controls}>
     <button type={s.button} onClick={onIncrement}>
-      Плюс 1
+      Good
     </button>
-    <button type={s.button} onClick={onDecrement} className={s.pug}>
-      Минус 1
+    <button type={s.button} onClick={onIncrement}>
+      Neutral
+    </button>
+    <button type={s.button} onClick={onIncrement}>
+      Bad
     </button>
   </div>
 );
