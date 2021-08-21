@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-// import Feedback from './components/Feedback';
-// import Dropdown from './components/Dropdown';
+import Section from './components/Section';
+import Container from './components/Container';
+import Statistics from './components/Statistics';
+import Notification from './components/Notification';
+import FeedbackOptions from './components/FeedbackOptions';
 
 class App extends Component {
   state = {
@@ -9,12 +12,18 @@ class App extends Component {
     bad: 0,
   };
 
-  countTotalFeedback = e => {
+  countFeedback = e => {
     const buttonName = e.currentTarget.name;
 
     this.setState(prevState => ({
       [buttonName]: prevState[buttonName] + 1,
     }));
+  };
+
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+
+    return good + neutral + bad;
   };
 
   getPositiveFeedback = () => {
@@ -28,38 +37,30 @@ class App extends Component {
     const { good, neutral, bad } = this.state;
     const options = Object.keys(this.state);
     const calckOfPositiveFeedback = this.getPositiveFeedback();
+    const total = this.countTotalFeedback();
 
     return (
-      <div>
-        <div>
-          <h1>Please leave feedback</h1>
-          <div>
-            {options.map((option, index) => (
-              <button
-                key={index}
-                name={option}
-                onClick={this.countTotalFeedback}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h2>Statistics</h2>
+      <Container>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={options}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
           {good + neutral + bad === 0 ? (
-            <p>No feedback given</p>
+            <Notification message="No feedback given" />
           ) : (
-            <div>
-              <p>Good: {good}</p>
-              <p>Neutral: {neutral}</p>
-              <p>Bad: {bad}</p>
-              <p>Total: {good + neutral + bad}</p>
-              <p>Positive feedback: {calckOfPositiveFeedback}</p>
-            </div>
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={neutral}
+              total={total}
+              positivePercentage={calckOfPositiveFeedback}
+            />
           )}
-        </div>
-      </div>
+        </Section>
+      </Container>
     );
   }
 }
